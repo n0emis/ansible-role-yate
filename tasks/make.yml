@@ -1,0 +1,35 @@
+---
+- name: Install make dependencies
+  apt:
+    name:
+      - subversion
+      - autoconf
+      - build-essential
+
+- name: Checkout yate subversion repository
+  subversion:
+    repo: http://voip.null.ro/svn/yate/trunk
+    dest: /usr/src/yate
+
+- name: Run Autogen script
+  command: ./autogen.sh
+  args:
+    chdir: /usr/src/yate
+
+- name: Run Configure script
+  command: ./configure
+  args:
+    chdir: /usr/src/yate
+
+- name: Build Yate
+  command: make
+  args:
+    chdir: /usr/src/yate
+
+- name: Install Yate
+  command: make install-noapi
+  args:
+    chdir: /usr/src/yate
+
+- name: Configure Libraries
+  command: ldconfig

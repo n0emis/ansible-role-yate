@@ -1,0 +1,8 @@
+---
+- name: Check if Yate is installed
+  stat:
+    path: /usr/local/bin/yate
+  register: stat_result
+
+- import_tasks: make.yml
+  when: yate_rebuild or (stat_result.stat.exists == False and yate_build)
