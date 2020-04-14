@@ -1,3 +1,8 @@
 ---
 yate_build: yes
 yate_rebuild: no
+yate_config_directory: /etc/yate
+yate_build_directory: /usr/src/yate
+yate_user: root
+yate_group: "{{ yate_user }}"
+yate_binary: /usr/local/bin/yate

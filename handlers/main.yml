@@ -1,0 +1,5 @@
+---
+- name: reload yate
+  service:
+    name: yate
+    state: reloaded

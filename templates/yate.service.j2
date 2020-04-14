@@ -1,0 +1,16 @@
+[Unit]
+Description=Yet Another Telephony Engine
+After=network.target
+
+[Service]
+Type=forking
+Restart=always
+PIDFile=/run/yate.pid
+User={{ yate_user }}
+Group={{ yate_group }}
+ExecStart={{ yate_binary }} -d -p $PIDFile -F -s -r -l /var/log/yate -c {{ yate_config_directory }} -vvv -Df
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target

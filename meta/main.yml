@@ -1,6 +1,6 @@
 galaxy_info:
   author: n0emis
-  description: install and build yate
+  description: builds, installs and configures Yet Another Telephony Engine (yate)
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value

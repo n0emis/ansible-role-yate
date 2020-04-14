@@ -9,7 +9,7 @@
 - name: Checkout yate subversion repository
   subversion:
     repo: http://voip.null.ro/svn/yate/trunk
-    dest: /usr/src/yate
+    dest: "{{ yate_build_directory }}"
 
 - name: Run Autogen script
   command: ./autogen.sh
@@ -33,3 +33,10 @@
 
 - name: Configure Libraries
   command: ldconfig
+
+- name: Copy yate service file
+  copy:
+    src: "{{ yate_build_directory }}/packing/deb/yate.init"
+    dest: /etc/init.d/yate
+    mode: 755
+    remote_src: yes

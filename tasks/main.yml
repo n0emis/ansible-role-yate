@@ -1,8 +1,34 @@
 ---
 - name: Check if Yate is installed
   stat:
-    path: /usr/local/bin/yate
+    path: "{{ yate_binary }}"
   register: stat_result
+
+- name: Ensure yate user exists
+  user:
+    name: "{{ yate_user }}"
+    group: "{{ yate_group }}"
+    state: present
 
 - import_tasks: make.yml
   when: yate_rebuild or (stat_result.stat.exists == False and yate_build)
+
+- name: Install Yate's service file
+  template:
+    src: yate.service.j2
+    dest: /etc/systemd/system/yate.service
+
+- name: Ensure that yate config directory exists
+  file:
+    path: "{{ yate_config_directory }}"
+    state: directory
+
+- import_tasks: config.yml
+  notify: reload yate
+
+- name: Enable and start Yate service
+  systemd:
+    daemon_reload: yes
+    name: yate
+    state: started
+    enabled: yes
