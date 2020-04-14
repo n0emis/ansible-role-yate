@@ -6,3 +6,10 @@ yate_build_directory: /usr/src/yate
 yate_user: root
 yate_group: "{{ yate_user }}"
 yate_binary: /usr/local/bin/yate
+
+yate_config:
+  yate:
+    general:
+      nodename: "{{ ansible_fqdn }}"
+    localsym:
+      h323chan.yate: 'yes'

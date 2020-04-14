@@ -1,0 +1,5 @@
+---
+- include: section.yml
+  loop: "{{ config_file.value | dict2items }}"
+  loop_control:
+    loop_var: config_block

@@ -23,8 +23,7 @@
     path: "{{ yate_config_directory }}"
     state: directory
 
-- import_tasks: config.yml
-  notify: reload yate
+- import_tasks: config/main.yml
 
 - name: Enable and start Yate service
   systemd:

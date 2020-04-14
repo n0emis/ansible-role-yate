@@ -1,0 +1,9 @@
+---
+- name: set config option
+  ini_file:
+    path: "{{ yate_config_directory }}/{{ config_file.key }}.conf"
+    section: "{{ config_block.key }}"
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ config_block.value | dict2items }}"
+  notify: reload yate

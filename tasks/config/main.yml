@@ -1,0 +1,5 @@
+---
+- include: file.yml
+  loop: "{{ yate_config | dict2items }}"
+  loop_control:
+    loop_var: config_file
