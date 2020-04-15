@@ -2,6 +2,7 @@
 - name: Install make dependencies
   apt:
     name:
+      - libgsm1-dev
       - subversion
       - autoconf
       - build-essential
