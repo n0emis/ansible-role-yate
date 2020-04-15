@@ -1,4 +1,10 @@
 ---
+- name: "cleanup config file {{ config_file.key }}"
+  file:
+    path: "{{ yate_config_directory }}/{{ config_file.key }}.conf"
+    state: absent
+  when: yate_cleanup_config
+
 - include: section.yml
   loop: "{{ config_file.value | dict2items }}"
   loop_control:

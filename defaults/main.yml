@@ -7,6 +7,8 @@ yate_user: root
 yate_group: "{{ yate_user }}"
 yate_binary: /usr/local/bin/yate
 
+yate_cleanup_config: false
+
 yate_config:
   yate:
     general:
