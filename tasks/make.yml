@@ -2,10 +2,14 @@
 - name: Install make dependencies
   apt:
     name:
-      - libgsm1-dev
       - subversion
       - autoconf
       - build-essential
+      - zlib1g-dev
+      - libssl-dev
+      - libgsm1-dev
+      - pkg-config
+      - speex
 
 - name: Checkout yate subversion repository
   subversion:
@@ -15,22 +19,22 @@
 - name: Run Autogen script
   command: ./autogen.sh
   args:
-    chdir: /usr/src/yate
+    chdir: "{{ yate_build_directory }}"
 
 - name: Run Configure script
-  command: ./configure
+  command: ./configure --enable-sse2 --with-libspeex --enable-g722-webrtc=no
   args:
-    chdir: /usr/src/yate
+    chdir: "{{ yate_build_directory }}"
 
 - name: Build Yate
   command: make
   args:
-    chdir: /usr/src/yate
+    chdir: "{{ yate_build_directory }}"
 
 - name: Install Yate
   command: make install-noapi
   args:
-    chdir: /usr/src/yate
+    chdir: "{{ yate_build_directory }}"
 
 - name: Configure Libraries
   command: ldconfig
